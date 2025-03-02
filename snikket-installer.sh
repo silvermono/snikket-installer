@@ -25,19 +25,12 @@ fi
 install_whiptail
 
 # Function to display a spinner while a command is running
-spinner() {
-  local pid=$1
-  local delay=0.1
-  local spinstr='|/-\'
-  while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
-    local temp=${spinstr#?}
-    printf " [%c]  " "$spinstr"
-    local spinstr=$temp${spinstr%"$temp"}
-    sleep $delay
-    printf "\b\b\b\b\b\b"
-  done
-  printf "    \b\b\b\b"
-}
+system_update() {
+  apt update > /dev/null 2>&1
+  apt upgrade -y > /dev/null 2>&1
+  apt autoclean -y > /dev/null 2>&1
+  apt autoremove -y > /dev/null 2>&1
+  }
 
 # Function to check DNS records
 check_dns() {
@@ -205,7 +198,7 @@ configure_firewall() {
       ufw delete allow 443/tcp
       ufw delete allow 5222/tcp
       ufw delete allow 5269/tcp
-      ufw delete allow 5000/tcp  # Remove port 5000
+      ufw delete allow 5000/tcp
       ufw delete allow 3478/tcp
       ufw delete allow 3479/tcp
       ufw delete allow 3478/udp
@@ -260,7 +253,7 @@ configure_firewall() {
       iptables -D INPUT -p tcp --dport 443 -j ACCEPT
       iptables -D INPUT -p tcp --dport 5222 -j ACCEPT
       iptables -D INPUT -p tcp --dport 5269 -j ACCEPT
-      iptables -D INPUT -p tcp --dport 5000 -j ACCEPT  # Remove port 5000
+      iptables -D INPUT -p tcp --dport 5000 -j ACCEPT
       iptables -D INPUT -p tcp --dport 3478 -j ACCEPT
       iptables -D INPUT -p tcp --dport 3479 -j ACCEPT
       iptables -D INPUT -p udp --dport 3478 -j ACCEPT
@@ -347,6 +340,9 @@ main_menu() {
           continue
         fi
 
+        # Update the System
+        system_update
+        
         # Install Docker
         install_docker
 
