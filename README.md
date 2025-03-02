@@ -32,6 +32,12 @@ Before running the installation script, ensure your server meets the following r
 
 `curl https://raw.githubusercontent.com/silvermono/snikket-installer/refs/heads/main/snikket-installer.sh | sudo bash`
 
+> Somethimes up and down arrown may not work with this method
+
 ## What's Next
 
 Fine tune Your server. For detailed information, please visit the official [Advanced configuration](https://snikket.org/service/help/advanced/config/) section on Snikket's web site.
+
+* * *
+
+“Snikket” and the parrot logo are trademarks of Snikket Community Interest Company.
