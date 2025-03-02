@@ -31,3 +31,7 @@ Before running the installation script, ensure your server meets the following r
 > *Be sure that You understand the risks of piping directly into BASH as root!*
 
 `curl https://raw.githubusercontent.com/silvermono/snikket-installer/refs/heads/main/snikket-installer.sh | sudo bash`
+
+## What's Next
+
+Fine tune Your server. For detailed information, please visit the official [Advanced configuration](https://snikket.org/service/help/advanced/config/) section on Snikket's web site.
